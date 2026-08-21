@@ -63,13 +63,18 @@ export default function ResumePreview() {
         },
       });
 
-      // Generate single-page A4 PDF
-      const imgData = canvas.toDataURL('image/png', 1.0);
-      const pdf = new jsPDF('p', 'mm', 'a4');
+      // Generate single-page A4 PDF optimized to be well under 2MB
+      const imgData = canvas.toDataURL('image/jpeg', 0.88);
+      const pdf = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: 'a4',
+        compress: true,
+      });
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
 
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
 
       const fileName = (resumeData.personalInfo.fullName || 'resume')
         .replace(/\s+/g, '_')
