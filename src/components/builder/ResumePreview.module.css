@@ -1,0 +1,93 @@
+.previewContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.zoomControls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.zoomLevel {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  min-width: 36px;
+  text-align: center;
+}
+
+.downloadActions {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.previewScroll {
+  flex: 1;
+  overflow: auto;
+  padding: var(--space-lg);
+  display: flex;
+  justify-content: center;
+  background: var(--bg-tertiary);
+}
+
+.page {
+  transform-origin: top center;
+  transition: transform var(--transition-base);
+}
+
+.pageInner {
+  width: 816px; /* 8.5in * 96dpi */
+  height: 1056px; /* 11in * 96dpi */
+  max-height: 1056px;
+  background: white;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* Print Styles - hide everything except the resume */
+@media print {
+  /* Hide all builder UI */
+  .toolbar,
+  .downloadActions,
+  .zoomControls {
+    display: none !important;
+  }
+
+  .previewContainer {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: white;
+  }
+  
+  .previewScroll {
+    padding: 0;
+    background: white;
+    overflow: visible;
+    display: block;
+  }
+
+  .page {
+    transform: none !important;
+  }
+
+  .pageInner {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}

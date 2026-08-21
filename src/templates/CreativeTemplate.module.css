@@ -1,0 +1,182 @@
+.resume {
+  background: white;
+  width: 816px;
+  height: 1056px;
+  max-height: 1056px;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  font-size: 8.5pt;
+  line-height: 1.25;
+  color: #1f2937;
+}
+
+.header {
+  position: relative;
+  padding: 18px 28px 12px;
+  overflow: hidden;
+}
+
+.headerBg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ec4899, #a855f7);
+  opacity: 0.08;
+}
+
+.headerContent {
+  position: relative;
+}
+
+.name {
+  font-size: 18pt;
+  font-weight: 900;
+  color: #111;
+  margin-bottom: 1px;
+  letter-spacing: -0.5px;
+}
+
+.title {
+  font-size: 9pt;
+  color: #ec4899;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px 10px;
+  font-size: 7.5pt;
+  color: #6b7280;
+}
+
+.body {
+  padding: 2px 28px 18px;
+}
+
+.section {
+  margin-bottom: 6px;
+}
+
+.sectionLabel {
+  display: inline-block;
+  font-size: 6pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: white;
+  background: linear-gradient(135deg, #ec4899, #a855f7);
+  padding: 1px 8px;
+  border-radius: 2px;
+  margin-bottom: 4px;
+}
+
+.summaryText {
+  font-size: 8pt;
+  color: #374151;
+  line-height: 1.3;
+}
+
+.entry {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ec4899;
+  flex-shrink: 0;
+}
+
+.line {
+  width: 1px;
+  flex: 1;
+  background: #e5e7eb;
+  margin-top: 2px;
+}
+
+.entryContent {
+  flex: 1;
+}
+
+.entryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.entryTitle {
+  font-size: 9pt;
+  font-weight: 700;
+  color: #111827;
+}
+
+.company {
+  font-size: 8pt;
+  color: #6b7280;
+  margin-bottom: 1px;
+}
+
+.date {
+  font-size: 7.5pt;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+.meta {
+  font-size: 7.5pt;
+  color: #6b7280;
+  margin-bottom: 1px;
+}
+
+.bullets {
+  list-style: none;
+  padding: 0;
+  margin-top: 1px;
+}
+
+.bullets li {
+  font-size: 8pt;
+  color: #374151;
+  margin-bottom: 0;
+  padding-left: 10px;
+  position: relative;
+  line-height: 1.25;
+}
+
+.bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #ec4899;
+  font-size: 7pt;
+}
+
+.skillCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.skillChip {
+  padding: 0px 7px;
+  border-radius: 10px;
+  font-size: 7pt;
+  font-weight: 500;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(168, 85, 247, 0.1));
+  color: #7c3aed;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  line-height: 1.5;
+}

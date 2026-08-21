@@ -1,0 +1,202 @@
+.builder {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+/* Top Bar */
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-xl);
+  height: 60px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+}
+
+.logoIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  color: white;
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Steps */
+.steps {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.813rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.step:hover {
+  color: var(--text-secondary);
+  background: var(--bg-glass);
+}
+
+.stepActive {
+  background: var(--gradient-subtle);
+  color: var(--accent-primary-light);
+  border: 1px solid var(--border-accent);
+}
+
+.stepDone {
+  color: var(--success);
+}
+
+.stepIcon {
+  font-size: 1rem;
+  display: flex;
+}
+
+.stepLabel {
+  display: inline;
+}
+
+.topBarActions {
+  display: flex;
+  gap: var(--space-sm);
+  min-width: 160px;
+  justify-content: flex-end;
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.editorPanel {
+  width: 50%;
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editorScroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-md);
+}
+
+.previewPanel {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Download Step */
+.downloadStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-4xl) var(--space-xl);
+  gap: var(--space-md);
+}
+
+.downloadIcon {
+  font-size: 3rem;
+  color: var(--accent-primary);
+}
+
+.downloadStep h3 {
+  font-size: 1.5rem;
+}
+
+.downloadStep p {
+  color: var(--text-secondary);
+  max-width: 400px;
+}
+
+@media (max-width: 1024px) {
+  .editorPanel {
+    width: 100%;
+    border-right: none;
+  }
+
+  .previewPanel {
+    display: none;
+  }
+
+  .stepLabel {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .topBar {
+    padding: 0 var(--space-md);
+  }
+
+  .topBarActions {
+    min-width: auto;
+  }
+}
+
+/* Print: hide everything except the resume preview */
+@media print {
+  .topBar {
+    display: none !important;
+  }
+
+  .editorPanel {
+    display: none !important;
+  }
+
+  .mainContent {
+    display: block !important;
+  }
+
+  .previewPanel {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  .builder {
+    height: auto;
+    overflow: visible;
+  }
+}
