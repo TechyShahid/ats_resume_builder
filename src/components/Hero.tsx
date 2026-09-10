@@ -26,7 +26,7 @@ export default function Hero() {
 
         <p className={styles.subtitle}>
           Upload your resume and let AI optimize it for Applicant Tracking Systems.
-          Choose from 5 premium templates designed to pass ATS filters and impress recruiters.
+          Choose from 10 premium templates designed to pass ATS filters and impress recruiters.
         </p>
 
         <div className={styles.actions}>

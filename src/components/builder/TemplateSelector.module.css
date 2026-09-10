@@ -111,3 +111,47 @@
   from { transform: scale(0); }
   to { transform: scale(1); }
 }
+
+/* Typography Customization Section */
+.typographySection {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.typographyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.controlLabel {
+  font-size: 0.813rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.selectInput {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.selectInput:hover,
+.selectInput:focus {
+  border-color: var(--accent-primary);
+}

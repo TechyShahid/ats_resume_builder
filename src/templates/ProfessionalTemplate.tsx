@@ -1,4 +1,5 @@
 import type { ResumeData } from '@/types/resume';
+import FormattedText from '@/components/common/FormattedText';
 import styles from './ProfessionalTemplate.module.css';
 
 export default function ProfessionalTemplate({ data }: { data: ResumeData }) {
@@ -24,7 +25,16 @@ export default function ProfessionalTemplate({ data }: { data: ResumeData }) {
             {personalInfo.email && <p>{personalInfo.email}</p>}
             {personalInfo.phone && <p>{personalInfo.phone}</p>}
             {personalInfo.location && <p>{personalInfo.location}</p>}
-            {personalInfo.linkedin && <p>{personalInfo.linkedin}</p>}
+            {personalInfo.linkedin && (
+              <p>
+                <FormattedText text={personalInfo.linkedin} />
+              </p>
+            )}
+            {personalInfo.portfolio && (
+              <p>
+                <FormattedText text={personalInfo.portfolio} />
+              </p>
+            )}
           </div>
         </div>
 
@@ -60,7 +70,7 @@ export default function ProfessionalTemplate({ data }: { data: ResumeData }) {
         {summary && (
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Professional Summary</h2>
-            <p className={styles.text}>{summary}</p>
+            <p className={styles.text}><FormattedText text={summary} /></p>
           </div>
         )}
 
@@ -75,7 +85,9 @@ export default function ProfessionalTemplate({ data }: { data: ResumeData }) {
                 </div>
                 <p className={styles.entryCompany}>{exp.company}{exp.location ? `, ${exp.location}` : ''}</p>
                 <ul className={styles.bullets}>
-                  {exp.bullets.filter(b => b.trim()).map((b, i) => <li key={i}>{b}</li>)}
+                  {exp.bullets.filter(b => b.trim()).map((b, i) => (
+                    <li key={i}><FormattedText text={b} /></li>
+                  ))}
                 </ul>
               </div>
             ))}
@@ -101,9 +113,11 @@ export default function ProfessionalTemplate({ data }: { data: ResumeData }) {
             {projects.map((proj) => (
               <div key={proj.id} className={styles.entry}>
                 <h3 className={styles.entryTitle}>{proj.name}</h3>
-                {proj.description && <p className={styles.text}>{proj.description}</p>}
+                {proj.description && <p className={styles.text}><FormattedText text={proj.description} /></p>}
                 <ul className={styles.bullets}>
-                  {proj.bullets.filter(b => b.trim()).map((b, i) => <li key={i}>{b}</li>)}
+                  {proj.bullets.filter(b => b.trim()).map((b, i) => (
+                    <li key={i}><FormattedText text={b} /></li>
+                  ))}
                 </ul>
               </div>
             ))}

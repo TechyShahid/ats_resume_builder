@@ -2,8 +2,8 @@
   background: white;
   color: #1f2937;
   padding: 20px 28px;
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 8.5pt;
+  font-family: var(--resume-font, 'Inter', 'Helvetica Neue', Arial, sans-serif);
+  font-size: var(--resume-font-size, 8.5pt);
   line-height: 1.25;
   width: 816px;
   height: 1056px;

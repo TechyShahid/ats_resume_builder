@@ -1,15 +1,103 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { HiPlus, HiTrash, HiSparkles } from 'react-icons/hi2';
 import { useResume } from '@/context/ResumeContext';
 import { generateId } from '@/types/resume';
 import type { WorkExperience, Education, Skill, Certification, Project } from '@/types/resume';
+import RichToolbar from './RichToolbar';
 import styles from './ResumeForm.module.css';
+
+function BulletInputItem({
+  value,
+  onChange,
+  onRemove,
+  placeholder = 'Led development of...',
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  onRemove: () => void;
+  placeholder?: string;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const formatSelection = (type: 'bold' | 'italic' | 'link') => {
+    const el = inputRef.current;
+    if (!el) return;
+    const start = el.selectionStart || 0;
+    const end = el.selectionEnd || 0;
+    const selected = value.substring(start, end);
+    let replacement = '';
+    let newCursorPos = start;
+
+    if (type === 'bold') {
+      replacement = selected ? `**${selected}**` : '**bold**';
+      newCursorPos = start + replacement.length;
+    } else if (type === 'italic') {
+      replacement = selected ? `*${selected}*` : '*italic*';
+      newCursorPos = start + replacement.length;
+    } else if (type === 'link') {
+      const url = prompt('Enter URL (e.g. https://example.com):', 'https://');
+      if (!url) return;
+      replacement = `[${selected || 'link'}](${url})`;
+      newCursorPos = start + replacement.length;
+    }
+
+    const updated = value.substring(0, start) + replacement + value.substring(end);
+    onChange(updated);
+    setTimeout(() => {
+      el.focus();
+      el.setSelectionRange(newCursorPos, newCursorPos);
+    }, 0);
+  };
+
+  return (
+    <div className={styles.bulletRow}>
+      <span className={styles.bulletDot}>•</span>
+      <input
+        ref={inputRef}
+        className="input"
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      <div className={styles.bulletFormatActions}>
+        <button
+          type="button"
+          className={styles.miniFormatBtn}
+          onClick={() => formatSelection('bold')}
+          title="Make selection Bold (**text**)"
+        >
+          <strong>B</strong>
+        </button>
+        <button
+          type="button"
+          className={styles.miniFormatBtn}
+          onClick={() => formatSelection('italic')}
+          title="Make selection Italic (*text*)"
+        >
+          <em>I</em>
+        </button>
+        <button
+          type="button"
+          className={styles.miniFormatBtn}
+          onClick={() => formatSelection('link')}
+          title="Insert Hyperlink"
+        >
+          🔗
+        </button>
+      </div>
+      <button className={styles.removeBulletBtn} onClick={onRemove} title="Delete bullet">
+        <HiTrash />
+      </button>
+    </div>
+  );
+}
 
 export default function ResumeForm() {
   const { resumeData, updateField, setIsProcessing, setProcessingMessage } = useResume();
   const [optimizing, setOptimizing] = useState<string | null>(null);
+  const summaryRef = useRef<HTMLTextAreaElement>(null);
 
   const optimizeSection = async (type: string, data: unknown, onResult: (result: unknown) => void) => {
     setOptimizing(type);
@@ -221,7 +309,14 @@ export default function ResumeForm() {
             <HiSparkles /> {optimizing === 'summary' ? 'Optimizing...' : 'AI Optimize'}
           </button>
         </div>
+        <RichToolbar
+          textareaRef={summaryRef}
+          value={resumeData.summary}
+          onChange={(val) => updateField('summary', val)}
+          label="Formatting: select text and click B, I, or Link"
+        />
         <textarea
+          ref={summaryRef}
           className="input textarea"
           placeholder="Results-driven software engineer with 8+ years of experience..."
           value={resumeData.summary}
@@ -288,18 +383,12 @@ export default function ResumeForm() {
                 </button>
               </div>
               {exp.bullets.map((bullet, idx) => (
-                <div key={idx} className={styles.bulletRow}>
-                  <span className={styles.bulletDot}>•</span>
-                  <input
-                    className="input"
-                    placeholder="Led development of..."
-                    value={bullet}
-                    onChange={(e) => updateBullet(exp.id, idx, e.target.value)}
-                  />
-                  <button className={styles.removeBulletBtn} onClick={() => removeBullet(exp.id, idx)}>
-                    <HiTrash />
-                  </button>
-                </div>
+                <BulletInputItem
+                  key={idx}
+                  value={bullet}
+                  onChange={(val) => updateBullet(exp.id, idx, val)}
+                  onRemove={() => removeBullet(exp.id, idx)}
+                />
               ))}
               <button className={`btn btn-ghost btn-sm ${styles.addBulletBtn}`} onClick={() => addBullet(exp.id)}>
                 <HiPlus /> Add Bullet
@@ -471,8 +560,11 @@ export default function ResumeForm() {
                   onChange={(e) => updateProject(proj.id, 'url', e.target.value)} />
               </div>
               <div className="input-group" style={{ gridColumn: 'span 2' }}>
-                <label className="input-label">Description</label>
-                <textarea className="input textarea" placeholder="Built a full-stack..." value={proj.description}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                  <label className="input-label" style={{ margin: 0 }}>Description</label>
+                  <span style={{ fontSize: '0.688rem', color: 'var(--text-muted)' }}>Supports **bold**, *italic*, [link](url)</span>
+                </div>
+                <textarea className="input textarea" placeholder="Built a full-stack platform using **Next.js** and [Stripe API](https://stripe.com)..." value={proj.description}
                   onChange={(e) => updateProject(proj.id, 'description', e.target.value)} rows={2} />
               </div>
             </div>

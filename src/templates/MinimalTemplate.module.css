@@ -2,8 +2,8 @@
   background: white;
   color: #1a1a1a;
   padding: 28px 36px;
-  font-family: 'Helvetica Neue', 'Arial', sans-serif;
-  font-size: 8.5pt;
+  font-family: var(--resume-font, 'Helvetica Neue', 'Arial', sans-serif);
+  font-size: var(--resume-font-size, 8.5pt);
   line-height: 1.3;
   width: 816px;
   height: 1056px;

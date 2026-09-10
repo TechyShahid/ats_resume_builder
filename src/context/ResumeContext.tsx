@@ -1,7 +1,14 @@
 'use client';
 
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-import { ResumeData, TemplateName, BuilderStep, EMPTY_RESUME } from '@/types/resume';
+import {
+  ResumeData,
+  TemplateName,
+  BuilderStep,
+  EMPTY_RESUME,
+  ResumeFontFamily,
+  ResumeFontSize,
+} from '@/types/resume';
 
 interface ResumeContextType {
   resumeData: ResumeData;
@@ -9,6 +16,10 @@ interface ResumeContextType {
   updateField: <K extends keyof ResumeData>(field: K, value: ResumeData[K]) => void;
   selectedTemplate: TemplateName;
   setSelectedTemplate: (template: TemplateName) => void;
+  selectedFont: ResumeFontFamily;
+  setSelectedFont: (font: ResumeFontFamily) => void;
+  selectedFontSize: ResumeFontSize;
+  setSelectedFontSize: (size: ResumeFontSize) => void;
   currentStep: BuilderStep;
   setCurrentStep: (step: BuilderStep) => void;
   isProcessing: boolean;
@@ -23,6 +34,8 @@ const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
 export function ResumeProvider({ children }: { children: ReactNode }) {
   const [resumeData, setResumeData] = useState<ResumeData>(EMPTY_RESUME);
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateName>('modern');
+  const [selectedFont, setSelectedFont] = useState<ResumeFontFamily>('default');
+  const [selectedFontSize, setSelectedFontSize] = useState<ResumeFontSize>('standard');
   const [currentStep, setCurrentStep] = useState<BuilderStep>('upload');
   const [isProcessing, setIsProcessing] = useState(false);
   const [processingMessage, setProcessingMessage] = useState('');
@@ -34,6 +47,8 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
   const resetResume = useCallback(() => {
     setResumeData(EMPTY_RESUME);
     setSelectedTemplate('modern');
+    setSelectedFont('default');
+    setSelectedFontSize('standard');
     setCurrentStep('upload');
   }, []);
 
@@ -45,6 +60,10 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
         updateField,
         selectedTemplate,
         setSelectedTemplate,
+        selectedFont,
+        setSelectedFont,
+        selectedFontSize,
+        setSelectedFontSize,
         currentStep,
         setCurrentStep,
         isProcessing,

@@ -26,8 +26,8 @@ const features = [
   },
   {
     icon: <HiPaintBrush />,
-    title: '5 Premium Templates',
-    description: 'Classic, Modern, Minimal, Professional, and Creative — each crafted for different industries and roles.',
+    title: '10 Premium Templates',
+    description: 'Classic, Modern, Minimal, Professional, Creative, Executive, Tech, Nordic, Compact, and Elegant — crafted for every role and industry.',
   },
   {
     icon: <HiCloudArrowDown />,

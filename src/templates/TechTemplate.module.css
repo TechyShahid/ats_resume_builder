@@ -1,0 +1,280 @@
+.resume {
+  background: #ffffff;
+  color: #1e293b;
+  padding: 22px 28px;
+  font-family: var(--resume-font, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif);
+  font-size: var(--resume-font-size, 8.5pt);
+  line-height: 1.28;
+  width: 816px;
+  height: 1056px;
+  max-height: 1056px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.header {
+  border-bottom: 2px solid #059669;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.headerMain {
+  flex: 1;
+}
+
+.name {
+  font-size: 20pt;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.title {
+  font-size: 9.5pt;
+  font-weight: 600;
+  color: #059669;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 7.5pt;
+  color: #475569;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.contactLabel {
+  color: #059669;
+  font-weight: 600;
+}
+
+.section {
+  margin-bottom: 7px;
+}
+
+.sectionTitle {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #0f172a;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.slash {
+  color: #059669;
+  font-weight: 800;
+}
+
+.titleLine {
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.summaryText {
+  color: #334155;
+  font-size: 8pt;
+  line-height: 1.32;
+  background: #f8fafc;
+  padding: 5px 8px;
+  border-left: 2px solid #059669;
+  border-radius: 2px;
+}
+
+/* Skills Matrix */
+.skillsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background: #f8fafc;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid #f1f5f9;
+}
+
+.skillRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 7.8pt;
+}
+
+.skillCategory {
+  font-weight: 700;
+  color: #0f172a;
+  min-width: 80px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 7.2pt;
+  text-transform: uppercase;
+}
+
+.skillList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.skillBadge {
+  background: #e6f4ea;
+  color: #065f46;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 7.2pt;
+  font-weight: 600;
+}
+
+/* Experience */
+.entry {
+  margin-bottom: 6px;
+}
+
+.entryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.entryTitle {
+  font-size: 9pt;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.entryCompany {
+  font-size: 8pt;
+  font-weight: 600;
+  color: #059669;
+}
+
+.entryMeta {
+  color: #64748b;
+  font-weight: normal;
+}
+
+.entryDate {
+  font-size: 7.5pt;
+  color: #64748b;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  white-space: nowrap;
+}
+
+.bullets {
+  list-style: square;
+  padding-left: 14px;
+  margin: 2px 0 0 0;
+}
+
+.bullets li {
+  font-size: 8pt;
+  color: #334155;
+  margin-bottom: 1px;
+  line-height: 1.25;
+}
+
+/* Projects */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+}
+
+.projectCard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 5px 8px;
+}
+
+.projectHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.projectName {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.projectLink {
+  font-size: 7pt;
+  color: #059669;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.projectDesc {
+  font-size: 7.5pt;
+  color: #475569;
+  margin-bottom: 3px;
+}
+
+.techTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.techTag {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font-size: 6.8pt;
+  padding: 0 4px;
+  border-radius: 2px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+/* Two-column education & certifications */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.eduItem {
+  margin-bottom: 3px;
+}
+
+.eduDegree {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.eduSchool {
+  font-size: 7.8pt;
+  color: #475569;
+}
+
+.eduDate {
+  font-size: 7.2pt;
+  color: #64748b;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.certItem {
+  font-size: 7.8pt;
+  color: #334155;
+  margin-bottom: 2px;
+}

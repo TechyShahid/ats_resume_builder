@@ -20,7 +20,7 @@ const steps = [
     icon: <HiDocumentArrowDown />,
     number: '03',
     title: 'Choose Template & Download',
-    description: 'Pick from 5 ATS-friendly templates, preview in real-time, and download a clean text-based PDF ready to submit.',
+    description: 'Pick from 10 ATS-friendly templates, preview in real-time, and download a clean text-based PDF ready to submit.',
   },
 ];
 

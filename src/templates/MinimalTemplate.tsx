@@ -1,4 +1,5 @@
 import type { ResumeData } from '@/types/resume';
+import FormattedText from '@/components/common/FormattedText';
 import styles from './MinimalTemplate.module.css';
 
 export default function MinimalTemplate({ data }: { data: ResumeData }) {
@@ -9,15 +10,27 @@ export default function MinimalTemplate({ data }: { data: ResumeData }) {
       <div className={styles.header}>
         <h1 className={styles.name}>{personalInfo.fullName || 'Your Name'}</h1>
         <div className={styles.contact}>
-          {[personalInfo.email, personalInfo.phone, personalInfo.location, personalInfo.linkedin]
+          {[personalInfo.email, personalInfo.phone, personalInfo.location]
             .filter(Boolean)
             .join('  ·  ')}
+          {personalInfo.linkedin && (
+            <>
+              {'  ·  '}
+              <FormattedText text={personalInfo.linkedin} />
+            </>
+          )}
+          {personalInfo.portfolio && (
+            <>
+              {'  ·  '}
+              <FormattedText text={personalInfo.portfolio} />
+            </>
+          )}
         </div>
       </div>
 
       {summary && (
         <div className={styles.section}>
-          <p className={styles.summary}>{summary}</p>
+          <p className={styles.summary}><FormattedText text={summary} /></p>
         </div>
       )}
 
@@ -31,7 +44,9 @@ export default function MinimalTemplate({ data }: { data: ResumeData }) {
                 <span className={styles.date}>{exp.startDate} — {exp.endDate || 'Present'}</span>
               </div>
               <ul className={styles.bullets}>
-                {exp.bullets.filter(b => b.trim()).map((b, i) => <li key={i}>{b}</li>)}
+                {exp.bullets.filter(b => b.trim()).map((b, i) => (
+                  <li key={i}><FormattedText text={b} /></li>
+                ))}
               </ul>
             </div>
           ))}
@@ -75,7 +90,7 @@ export default function MinimalTemplate({ data }: { data: ResumeData }) {
           {projects.map((proj) => (
             <div key={proj.id} className={styles.entry}>
               <span className={styles.entryTitle}>{proj.name}</span>
-              {proj.description && <p className={styles.meta}>{proj.description}</p>}
+              {proj.description && <p className={styles.meta}><FormattedText text={proj.description} /></p>}
             </div>
           ))}
         </div>

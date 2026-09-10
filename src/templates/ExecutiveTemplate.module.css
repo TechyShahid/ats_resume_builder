@@ -1,0 +1,225 @@
+.resume {
+  background: #ffffff;
+  color: #1e293b;
+  padding: 24px 32px;
+  font-family: var(--resume-font, 'Georgia', 'Cambria', 'Times New Roman', serif);
+  font-size: var(--resume-font-size, 8.5pt);
+  line-height: 1.28;
+  width: 816px;
+  height: 1056px;
+  max-height: 1056px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: center;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 2px solid #0f2942;
+  position: relative;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 25%;
+  right: 25%;
+  height: 1.5px;
+  background: #b8860b;
+}
+
+.name {
+  font-size: 20pt;
+  font-weight: 700;
+  color: #0f2942;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 9.5pt;
+  font-weight: 600;
+  color: #b8860b;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-size: 7.5pt;
+  color: #475569;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.diamond {
+  color: #b8860b;
+  font-size: 6pt;
+}
+
+.section {
+  margin-bottom: 7px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.sectionTitle {
+  font-size: 9pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #0f2942;
+  white-space: nowrap;
+}
+
+.sectionLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, #b8860b, #e2e8f0);
+}
+
+.summaryText {
+  color: #334155;
+  font-size: 8pt;
+  line-height: 1.32;
+  text-align: justify;
+}
+
+/* Core Competencies Grid */
+.competenciesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px 12px;
+  background: #f8fafc;
+  border-left: 2.5px solid #b8860b;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  border-radius: 2px;
+}
+
+.competencyItem {
+  font-size: 7.8pt;
+  color: #0f2942;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 500;
+}
+
+.competencyItem span {
+  color: #b8860b;
+  margin-right: 4px;
+}
+
+/* Experience & Entries */
+.entry {
+  margin-bottom: 6px;
+  position: relative;
+  padding-left: 8px;
+  border-left: 1.5px solid #e2e8f0;
+}
+
+.entry:hover {
+  border-left-color: #b8860b;
+}
+
+.entryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1px;
+}
+
+.entryTitle {
+  font-size: 9pt;
+  font-weight: 700;
+  color: #0f2942;
+  display: inline;
+}
+
+.entryCompany {
+  font-size: 8.5pt;
+  color: #475569;
+  font-style: italic;
+  margin-bottom: 2px;
+}
+
+.entryDate {
+  font-size: 7.5pt;
+  font-weight: 600;
+  color: #b8860b;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  white-space: nowrap;
+}
+
+.bullets {
+  list-style: disc;
+  padding-left: 14px;
+  margin: 2px 0 0 0;
+}
+
+.bullets li {
+  font-size: 8pt;
+  color: #334155;
+  margin-bottom: 1px;
+  line-height: 1.25;
+}
+
+/* Two Column for Education & Certifications */
+.bottomRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.subEntry {
+  margin-bottom: 4px;
+}
+
+.subTitle {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #0f2942;
+}
+
+.subSubtitle {
+  font-size: 7.8pt;
+  color: #64748b;
+  font-style: italic;
+}
+
+.subDate {
+  font-size: 7.2pt;
+  color: #b8860b;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.certList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.certItem {
+  font-size: 7.8pt;
+  color: #334155;
+}
+
+.certItem strong {
+  color: #0f2942;
+}
+
+.projDesc {
+  font-size: 7.8pt;
+  color: #475569;
+}

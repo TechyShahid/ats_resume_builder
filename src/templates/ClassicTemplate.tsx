@@ -1,4 +1,5 @@
 import type { ResumeData } from '@/types/resume';
+import FormattedText from '@/components/common/FormattedText';
 import styles from './ClassicTemplate.module.css';
 
 export default function ClassicTemplate({ data }: { data: ResumeData }) {
@@ -19,7 +20,16 @@ export default function ClassicTemplate({ data }: { data: ResumeData }) {
           {personalInfo.email && <span>{personalInfo.email}</span>}
           {personalInfo.phone && <span>{personalInfo.phone}</span>}
           {personalInfo.location && <span>{personalInfo.location}</span>}
-          {personalInfo.linkedin && <span>{personalInfo.linkedin}</span>}
+          {personalInfo.linkedin && (
+            <span>
+              <FormattedText text={personalInfo.linkedin} />
+            </span>
+          )}
+          {personalInfo.portfolio && (
+            <span>
+              <FormattedText text={personalInfo.portfolio} />
+            </span>
+          )}
         </div>
       </div>
 
@@ -28,7 +38,9 @@ export default function ClassicTemplate({ data }: { data: ResumeData }) {
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Professional Summary</h2>
           <div className={styles.divider} />
-          <p className={styles.summaryText}>{summary}</p>
+          <p className={styles.summaryText}>
+            <FormattedText text={summary} />
+          </p>
         </div>
       )}
 
@@ -48,7 +60,9 @@ export default function ClassicTemplate({ data }: { data: ResumeData }) {
               </div>
               <ul className={styles.bullets}>
                 {exp.bullets.filter(b => b.trim()).map((bullet, i) => (
-                  <li key={i}>{bullet}</li>
+                  <li key={i}>
+                    <FormattedText text={bullet} />
+                  </li>
                 ))}
               </ul>
             </div>
@@ -110,10 +124,16 @@ export default function ClassicTemplate({ data }: { data: ResumeData }) {
           {projects.map((proj) => (
             <div key={proj.id} className={styles.entry}>
               <h3 className={styles.entryTitle}>{proj.name}</h3>
-              {proj.description && <p className={styles.projDesc}>{proj.description}</p>}
+              {proj.description && (
+                <p className={styles.projDesc}>
+                  <FormattedText text={proj.description} />
+                </p>
+              )}
               <ul className={styles.bullets}>
                 {proj.bullets.filter(b => b.trim()).map((bullet, i) => (
-                  <li key={i}>{bullet}</li>
+                  <li key={i}>
+                    <FormattedText text={bullet} />
+                  </li>
                 ))}
               </ul>
             </div>

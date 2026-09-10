@@ -1,0 +1,178 @@
+.resume {
+  background: #ffffff;
+  color: #1a1a1a;
+  padding: 24px 34px;
+  font-family: var(--resume-font, 'Garamond', 'Baskerville', 'Times New Roman', serif);
+  font-size: var(--resume-font-size, 8.8pt);
+  line-height: 1.28;
+  width: 816px;
+  height: 1056px;
+  max-height: 1056px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.name {
+  font-size: 22pt;
+  font-weight: normal;
+  letter-spacing: 1.5px;
+  color: #701a35;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.title {
+  font-size: 9pt;
+  font-style: italic;
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  font-size: 7.8pt;
+  color: #4b5563;
+}
+
+.sep {
+  color: #881337;
+  font-size: 6pt;
+}
+
+.section {
+  margin-bottom: 7px;
+}
+
+.sectionHeading {
+  text-align: center;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.sectionTitle {
+  font-size: 9pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #701a35;
+  display: inline-block;
+  background: #ffffff;
+  padding: 0 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.sectionLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #881337;
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.summaryText {
+  font-size: 8.2pt;
+  color: #262626;
+  text-align: justify;
+  line-height: 1.34;
+}
+
+.entry {
+  margin-bottom: 6px;
+}
+
+.entryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.entryTitle {
+  font-size: 9pt;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.entryCompany {
+  font-size: 8.5pt;
+  font-style: italic;
+  color: #701a35;
+}
+
+.entryDate {
+  font-size: 7.8pt;
+  color: #525252;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.bullets {
+  list-style: disc;
+  padding-left: 16px;
+  margin: 2px 0 0 0;
+}
+
+.bullets li {
+  font-size: 8.2pt;
+  color: #262626;
+  margin-bottom: 1px;
+  line-height: 1.25;
+}
+
+.skillLine {
+  font-size: 8.2pt;
+  color: #262626;
+  margin-bottom: 2px;
+}
+
+.skillLine strong {
+  color: #701a35;
+  text-transform: uppercase;
+  font-size: 7.8pt;
+  letter-spacing: 0.5px;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.eduItem {
+  margin-bottom: 4px;
+}
+
+.eduDegree {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.eduSchool {
+  font-size: 8pt;
+  font-style: italic;
+  color: #525252;
+}
+
+.certItem {
+  font-size: 8pt;
+  color: #262626;
+  margin-bottom: 2px;
+}
+
+.projDesc {
+  font-size: 8pt;
+  color: #525252;
+}

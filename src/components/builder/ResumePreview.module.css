@@ -26,6 +26,44 @@
   text-align: center;
 }
 
+.typographyControls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.selectWrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ctrlLabel {
+  font-size: 0.688rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.select {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.select:hover,
+.select:focus {
+  border-color: var(--accent-primary);
+}
+
 .downloadActions {
   display: flex;
   gap: var(--space-sm);

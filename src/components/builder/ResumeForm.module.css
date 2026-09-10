@@ -105,6 +105,34 @@
   flex-shrink: 0;
 }
 
+.bulletFormatActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 1px 3px;
+  flex-shrink: 0;
+}
+
+.miniFormatBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.688rem;
+  padding: 2px 5px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  line-height: 1;
+}
+
+.miniFormatBtn:hover {
+  background: var(--bg-glass-strong);
+  color: var(--text-primary);
+}
+
 .removeBulletBtn {
   width: 28px;
   height: 28px;

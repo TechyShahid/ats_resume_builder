@@ -1,0 +1,172 @@
+.resume {
+  background: #ffffff;
+  color: #1e293b;
+  padding: 24px 30px;
+  font-family: var(--resume-font, -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif);
+  font-size: var(--resume-font-size, 8.5pt);
+  line-height: 1.3;
+  width: 816px;
+  height: 1056px;
+  max-height: 1056px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.header {
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1.5px solid #1e293b;
+}
+
+.name {
+  font-size: 22pt;
+  font-weight: 300;
+  color: #0f172a;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.name strong {
+  font-weight: 700;
+}
+
+.title {
+  font-size: 8.5pt;
+  font-weight: 500;
+  color: #64748b;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 7.5pt;
+  color: #475569;
+}
+
+.contactDot {
+  color: #94a3b8;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 16px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.sectionLabel {
+  font-size: 8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #1e293b;
+  padding-top: 1px;
+}
+
+.sectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summaryText {
+  font-size: 8pt;
+  color: #334155;
+  line-height: 1.35;
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+}
+
+.entryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1px;
+}
+
+.entryTitle {
+  font-size: 8.8pt;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.entryCompany {
+  font-size: 8pt;
+  color: #64748b;
+  margin-bottom: 2px;
+}
+
+.entryDate {
+  font-size: 7.5pt;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.bullets {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.bullets li {
+  font-size: 8pt;
+  color: #334155;
+  position: relative;
+  padding-left: 12px;
+  margin-bottom: 1px;
+  line-height: 1.25;
+}
+
+.bullets li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: #94a3b8;
+}
+
+.skillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+}
+
+.skillPill {
+  font-size: 7.5pt;
+  color: #1e293b;
+  background: #f1f5f9;
+  padding: 1px 7px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.projEntry {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3px;
+}
+
+.projTitle {
+  font-size: 8.5pt;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.projDesc {
+  font-size: 7.8pt;
+  color: #475569;
+}

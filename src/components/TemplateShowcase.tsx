@@ -20,7 +20,7 @@ export default function TemplateShowcase() {
         <div className="badge badge-gradient" style={{ display: 'inline-flex', marginBottom: '1rem' }}>
           Templates
         </div>
-        <h2 className="section-title">5 Premium ATS Templates</h2>
+        <h2 className="section-title">{TEMPLATE_LIST.length} Premium ATS Templates</h2>
         <p className="section-subtitle">
           Each template is meticulously designed to be parseable by ATS systems while looking
           beautiful to recruiters.

@@ -6,8 +6,8 @@
   max-height: 1056px;
   overflow: hidden;
   box-sizing: border-box;
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 8pt;
+  font-family: var(--resume-font, 'Inter', 'Helvetica Neue', Arial, sans-serif);
+  font-size: var(--resume-font-size, 8pt);
   line-height: 1.25;
 }
 

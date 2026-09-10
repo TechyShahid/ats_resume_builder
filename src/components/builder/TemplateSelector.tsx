@@ -1,12 +1,25 @@
 'use client';
 
 import { useResume } from '@/context/ResumeContext';
-import { TEMPLATE_LIST } from '@/types/resume';
-import type { TemplateName } from '@/types/resume';
+import {
+  TEMPLATE_LIST,
+  RESUME_FONTS,
+  RESUME_FONT_SIZES,
+  type TemplateName,
+  type ResumeFontFamily,
+  type ResumeFontSize,
+} from '@/types/resume';
 import styles from './TemplateSelector.module.css';
 
 export default function TemplateSelector() {
-  const { selectedTemplate, setSelectedTemplate } = useResume();
+  const {
+    selectedTemplate,
+    setSelectedTemplate,
+    selectedFont,
+    setSelectedFont,
+    selectedFontSize,
+    setSelectedFontSize,
+  } = useResume();
 
   return (
     <div className={styles.selector}>
@@ -45,6 +58,52 @@ export default function TemplateSelector() {
             )}
           </button>
         ))}
+      </div>
+
+      {/* Typography Customization */}
+      <div className={styles.typographySection}>
+        <h3 className={styles.title}>Typography & Styling</h3>
+        <p className={styles.subtitle}>
+          Customize font family and sizing to fine-tune spacing and visual impact.
+        </p>
+
+        <div className={styles.typographyGrid}>
+          <div className={styles.controlGroup}>
+            <label htmlFor="selector-font-family" className={styles.controlLabel}>
+              Font Family
+            </label>
+            <select
+              id="selector-font-family"
+              className={styles.selectInput}
+              value={selectedFont}
+              onChange={(e) => setSelectedFont(e.target.value as ResumeFontFamily)}
+            >
+              {RESUME_FONTS.map((font) => (
+                <option key={font.id} value={font.id}>
+                  {font.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className={styles.controlGroup}>
+            <label htmlFor="selector-font-size" className={styles.controlLabel}>
+              Font Size
+            </label>
+            <select
+              id="selector-font-size"
+              className={styles.selectInput}
+              value={selectedFontSize}
+              onChange={(e) => setSelectedFontSize(e.target.value as ResumeFontSize)}
+            >
+              {RESUME_FONT_SIZES.map((size) => (
+                <option key={size.id} value={size.id}>
+                  {size.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   );

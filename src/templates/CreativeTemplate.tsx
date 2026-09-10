@@ -1,4 +1,5 @@
 import type { ResumeData } from '@/types/resume';
+import FormattedText from '@/components/common/FormattedText';
 import styles from './CreativeTemplate.module.css';
 
 export default function CreativeTemplate({ data }: { data: ResumeData }) {
@@ -15,7 +16,12 @@ export default function CreativeTemplate({ data }: { data: ResumeData }) {
             {personalInfo.email && <span>{personalInfo.email}</span>}
             {personalInfo.phone && <span>{personalInfo.phone}</span>}
             {personalInfo.location && <span>{personalInfo.location}</span>}
-            {personalInfo.linkedin && <span>{personalInfo.linkedin}</span>}
+            {personalInfo.linkedin && (
+              <span><FormattedText text={personalInfo.linkedin} /></span>
+            )}
+            {personalInfo.portfolio && (
+              <span><FormattedText text={personalInfo.portfolio} /></span>
+            )}
           </div>
         </div>
       </div>
@@ -24,7 +30,7 @@ export default function CreativeTemplate({ data }: { data: ResumeData }) {
         {summary && (
           <div className={styles.section}>
             <div className={styles.sectionLabel}>About</div>
-            <p className={styles.summaryText}>{summary}</p>
+            <p className={styles.summaryText}><FormattedText text={summary} /></p>
           </div>
         )}
 
@@ -44,7 +50,9 @@ export default function CreativeTemplate({ data }: { data: ResumeData }) {
                   </div>
                   <p className={styles.company}>{exp.company}{exp.location ? ` · ${exp.location}` : ''}</p>
                   <ul className={styles.bullets}>
-                    {exp.bullets.filter(b => b.trim()).map((b, i) => <li key={i}>{b}</li>)}
+                    {exp.bullets.filter(b => b.trim()).map((b, i) => (
+                      <li key={i}><FormattedText text={b} /></li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -100,7 +108,7 @@ export default function CreativeTemplate({ data }: { data: ResumeData }) {
                 <div className={styles.timeline}><div className={styles.dot} /></div>
                 <div className={styles.entryContent}>
                   <h3 className={styles.entryTitle}>{proj.name}</h3>
-                  {proj.description && <p className={styles.meta}>{proj.description}</p>}
+                  {proj.description && <p className={styles.meta}><FormattedText text={proj.description} /></p>}
                 </div>
               </div>
             ))}

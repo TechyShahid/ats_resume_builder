@@ -5,8 +5,8 @@
   max-height: 1056px;
   overflow: hidden;
   box-sizing: border-box;
-  font-family: 'Inter', 'Helvetica Neue', sans-serif;
-  font-size: 8.5pt;
+  font-family: var(--resume-font, 'Inter', 'Helvetica Neue', sans-serif);
+  font-size: var(--resume-font-size, 8.5pt);
   line-height: 1.25;
   color: #1f2937;
 }

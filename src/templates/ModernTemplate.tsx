@@ -1,4 +1,5 @@
 import type { ResumeData } from '@/types/resume';
+import FormattedText from '@/components/common/FormattedText';
 import styles from './ModernTemplate.module.css';
 
 export default function ModernTemplate({ data }: { data: ResumeData }) {
@@ -14,14 +15,25 @@ export default function ModernTemplate({ data }: { data: ResumeData }) {
           {personalInfo.email && <span>{personalInfo.email}</span>}
           {personalInfo.phone && <><span className={styles.sep}>|</span><span>{personalInfo.phone}</span></>}
           {personalInfo.location && <><span className={styles.sep}>|</span><span>{personalInfo.location}</span></>}
-          {personalInfo.linkedin && <><span className={styles.sep}>|</span><span>{personalInfo.linkedin}</span></>}
+          {personalInfo.linkedin && (
+            <>
+              <span className={styles.sep}>|</span>
+              <span><FormattedText text={personalInfo.linkedin} /></span>
+            </>
+          )}
+          {personalInfo.portfolio && (
+            <>
+              <span className={styles.sep}>|</span>
+              <span><FormattedText text={personalInfo.portfolio} /></span>
+            </>
+          )}
         </div>
       </div>
 
       {summary && (
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Summary</h2>
-          <p className={styles.text}>{summary}</p>
+          <p className={styles.text}><FormattedText text={summary} /></p>
         </div>
       )}
 
@@ -37,7 +49,7 @@ export default function ModernTemplate({ data }: { data: ResumeData }) {
               <p className={styles.entrySubtitle}>{exp.company}{exp.location ? ` • ${exp.location}` : ''}</p>
               <ul className={styles.bullets}>
                 {exp.bullets.filter(b => b.trim()).map((bullet, i) => (
-                  <li key={i}>{bullet}</li>
+                  <li key={i}><FormattedText text={bullet} /></li>
                 ))}
               </ul>
             </div>
@@ -89,10 +101,10 @@ export default function ModernTemplate({ data }: { data: ResumeData }) {
           {projects.map((proj) => (
             <div key={proj.id} className={styles.entry}>
               <h3 className={styles.entryTitle}>{proj.name}</h3>
-              {proj.description && <p className={styles.text}>{proj.description}</p>}
+              {proj.description && <p className={styles.text}><FormattedText text={proj.description} /></p>}
               <ul className={styles.bullets}>
                 {proj.bullets.filter(b => b.trim()).map((bullet, i) => (
-                  <li key={i}>{bullet}</li>
+                  <li key={i}><FormattedText text={bullet} /></li>
                 ))}
               </ul>
             </div>
