@@ -1,0 +1,221 @@
+.stripContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0 1rem;
+  height: 48px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.stripContainer::-webkit-scrollbar {
+  height: 3px;
+}
+
+.stripContainer::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 2px;
+}
+
+/* Groups */
+.group {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.groupLabel {
+  font-size: 0.688rem;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.divider {
+  width: 1px;
+  height: 22px;
+  background: var(--border-color);
+  flex-shrink: 0;
+  margin: 0 0.1rem;
+}
+
+/* Select inputs */
+.select {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  height: 28px;
+  transition: all var(--transition-fast);
+}
+
+.select:hover,
+.select:focus {
+  border-color: var(--accent-primary);
+}
+
+/* Selection Target Badge / Field Picker */
+.targetGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.targetBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 3px 8px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  font-weight: 600;
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.targetText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Size controls */
+.sizeControls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.sizeBtn {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-radius: 3px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.sizeBtn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(99, 102, 241, 0.08);
+}
+
+/* Style Toggles */
+.styleToggles {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.toolBtn {
+  height: 25px;
+  padding: 0 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.toolBtn:hover {
+  border-color: var(--primary);
+  color: var(--text-primary);
+}
+
+.toolBtnActive {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Color Swatches & Picker */
+.colorGroup {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.swatches {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.swatchBtn {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  padding: 0;
+}
+
+.swatchBtn:hover {
+  transform: scale(1.25);
+}
+
+.colorPickerWrap {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.colorInput {
+  width: 21px;
+  height: 21px;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+}
+
+.clearBtn {
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+  background: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 3px;
+  transition: all 0.12s ease;
+}
+
+.clearBtn:hover {
+  color: var(--danger);
+  border-color: rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.05);
+}

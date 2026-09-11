@@ -70,6 +70,30 @@
   align-items: center;
 }
 
+.styleFieldAnchor {
+  position: relative;
+}
+
+.popoverDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 1000;
+  animation: popoverFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.18));
+}
+
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .previewScroll {
   flex: 1;
   overflow: auto;

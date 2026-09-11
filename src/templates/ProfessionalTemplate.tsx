@@ -15,8 +15,8 @@ export default function ProfessionalTemplate({ data }: { data: ResumeData }) {
       {/* Sidebar */}
       <div className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
-          <h1 className={styles.name}>{personalInfo.fullName || 'Your Name'}</h1>
-          {personalInfo.title && <p className={styles.title}>{personalInfo.title}</p>}
+          <h1 className={styles.name}><FormattedText text={personalInfo.fullName || 'Your Name'} /></h1>
+          {personalInfo.title && <p className={styles.title}><FormattedText text={personalInfo.title} /></p>}
         </div>
 
         <div className={styles.sideSection}>

@@ -16,8 +16,8 @@ export default function ElegantTemplate({ data }: { data: ResumeData }) {
     <div className={styles.resume}>
       {/* Header */}
       <header className={styles.header}>
-        <h1 className={styles.name}>{personalInfo.fullName || 'Your Name'}</h1>
-        {personalInfo.title && <p className={styles.title}>{personalInfo.title}</p>}
+        <h1 className={styles.name}><FormattedText text={personalInfo.fullName || 'Your Name'} /></h1>
+        {personalInfo.title && <p className={styles.title}><FormattedText text={personalInfo.title} /></p>}
         <div className={styles.contact}>
           {personalInfo.email && <span>{personalInfo.email}</span>}
           {personalInfo.phone && (

@@ -21,7 +21,7 @@ function BulletInputItem({
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const formatSelection = (type: 'bold' | 'italic' | 'link') => {
+  const formatSelection = (type: 'bold' | 'italic' | 'link' | 'color') => {
     const el = inputRef.current;
     if (!el) return;
     const start = el.selectionStart || 0;
@@ -40,6 +40,11 @@ function BulletInputItem({
       const url = prompt('Enter URL (e.g. https://example.com):', 'https://');
       if (!url) return;
       replacement = `[${selected || 'link'}](${url})`;
+      newCursorPos = start + replacement.length;
+    } else if (type === 'color') {
+      const color = prompt('Enter hex color or CSS color name (e.g. #2563eb):', '#2563eb');
+      if (!color) return;
+      replacement = `[color=${color}]${selected || 'colored text'}[/color]`;
       newCursorPos = start + replacement.length;
     }
 
@@ -85,6 +90,14 @@ function BulletInputItem({
           title="Insert Hyperlink"
         >
           🔗
+        </button>
+        <button
+          type="button"
+          className={styles.miniFormatBtn}
+          onClick={() => formatSelection('color')}
+          title="Text Color ([color=#hex]text[/color])"
+        >
+          🎨
         </button>
       </div>
       <button className={styles.removeBulletBtn} onClick={onRemove} title="Delete bullet">
@@ -267,31 +280,37 @@ export default function ResumeForm() {
           <div className="input-group">
             <label className="input-label">Full Name *</label>
             <input className="input" placeholder="John Doe" value={resumeData.personalInfo.fullName}
+              data-field-path="personalInfo.fullName" data-field-label="Full Name"
               onChange={(e) => updatePersonalInfo('fullName', e.target.value)} />
           </div>
           <div className="input-group">
             <label className="input-label">Professional Title</label>
             <input className="input" placeholder="Senior Software Engineer" value={resumeData.personalInfo.title}
+              data-field-path="personalInfo.title" data-field-label="Job Title"
               onChange={(e) => updatePersonalInfo('title', e.target.value)} />
           </div>
           <div className="input-group">
             <label className="input-label">Email *</label>
             <input className="input" type="email" placeholder="john@example.com" value={resumeData.personalInfo.email}
+              data-field-path="personalInfo.email" data-field-label="Email"
               onChange={(e) => updatePersonalInfo('email', e.target.value)} />
           </div>
           <div className="input-group">
             <label className="input-label">Phone</label>
             <input className="input" placeholder="+1 (555) 123-4567" value={resumeData.personalInfo.phone}
+              data-field-path="personalInfo.phone" data-field-label="Phone"
               onChange={(e) => updatePersonalInfo('phone', e.target.value)} />
           </div>
           <div className="input-group">
             <label className="input-label">Location</label>
             <input className="input" placeholder="San Francisco, CA" value={resumeData.personalInfo.location}
+              data-field-path="personalInfo.location" data-field-label="Location"
               onChange={(e) => updatePersonalInfo('location', e.target.value)} />
           </div>
           <div className="input-group">
             <label className="input-label">LinkedIn</label>
             <input className="input" placeholder="linkedin.com/in/johndoe" value={resumeData.personalInfo.linkedin}
+              data-field-path="personalInfo.linkedin" data-field-label="LinkedIn"
               onChange={(e) => updatePersonalInfo('linkedin', e.target.value)} />
           </div>
         </div>
@@ -320,6 +339,7 @@ export default function ResumeForm() {
           className="input textarea"
           placeholder="Results-driven software engineer with 8+ years of experience..."
           value={resumeData.summary}
+          data-field-path="summary" data-field-label="Summary"
           onChange={(e) => updateField('summary', e.target.value)}
           rows={4}
         />
@@ -334,7 +354,7 @@ export default function ResumeForm() {
           </button>
         </div>
 
-        {resumeData.experience.map((exp) => (
+        {resumeData.experience.map((exp, expIndex) => (
           <div key={exp.id} className={styles.entryCard}>
             <div className={styles.entryHeader}>
               <h4 className={styles.entryTitle}>{exp.position || exp.company || 'New Experience'}</h4>
@@ -347,26 +367,31 @@ export default function ResumeForm() {
               <div className="input-group">
                 <label className="input-label">Position</label>
                 <input className="input" placeholder="Software Engineer" value={exp.position}
+                  data-field-path={`experience.${expIndex}.position`} data-field-label={`Exp #${expIndex+1} Position`}
                   onChange={(e) => updateExperience(exp.id, 'position', e.target.value)} />
               </div>
               <div className="input-group">
                 <label className="input-label">Company</label>
                 <input className="input" placeholder="Google" value={exp.company}
+                  data-field-path={`experience.${expIndex}.company`} data-field-label={`Exp #${expIndex+1} Company`}
                   onChange={(e) => updateExperience(exp.id, 'company', e.target.value)} />
               </div>
               <div className="input-group">
                 <label className="input-label">Start Date</label>
                 <input className="input" placeholder="Jan 2020" value={exp.startDate}
+                  data-field-path={`experience.${expIndex}.startDate`} data-field-label={`Exp #${expIndex+1} Start Date`}
                   onChange={(e) => updateExperience(exp.id, 'startDate', e.target.value)} />
               </div>
               <div className="input-group">
                 <label className="input-label">End Date</label>
                 <input className="input" placeholder="Present" value={exp.endDate}
+                  data-field-path={`experience.${expIndex}.endDate`} data-field-label={`Exp #${expIndex+1} End Date`}
                   onChange={(e) => updateExperience(exp.id, 'endDate', e.target.value)} />
               </div>
               <div className="input-group" style={{ gridColumn: 'span 2' }}>
                 <label className="input-label">Location</label>
                 <input className="input" placeholder="Mountain View, CA" value={exp.location}
+                  data-field-path={`experience.${expIndex}.location`} data-field-label={`Exp #${expIndex+1} Location`}
                   onChange={(e) => updateExperience(exp.id, 'location', e.target.value)} />
               </div>
             </div>
@@ -407,7 +432,7 @@ export default function ResumeForm() {
           </button>
         </div>
 
-        {resumeData.education.map((edu) => (
+        {resumeData.education.map((edu, eduIndex) => (
           <div key={edu.id} className={styles.entryCard}>
             <div className={styles.entryHeader}>
               <h4 className={styles.entryTitle}>{edu.institution || 'New Education'}</h4>
@@ -419,31 +444,37 @@ export default function ResumeForm() {
               <div className="input-group">
                 <label className="input-label">Institution</label>
                 <input className="input" placeholder="MIT" value={edu.institution}
+                  data-field-path={`education.${eduIndex}.institution`} data-field-label={`Edu #${eduIndex+1} Institution`}
                   onChange={(e) => updateEducation(edu.id, 'institution', e.target.value)} />
               </div>
               <div className="input-group">
                 <label className="input-label">Degree</label>
                 <input className="input" placeholder="Bachelor of Science" value={edu.degree}
+                  data-field-path={`education.${eduIndex}.degree`} data-field-label={`Edu #${eduIndex+1} Degree`}
                   onChange={(e) => updateEducation(edu.id, 'degree', e.target.value)} />
               </div>
               <div className="input-group">
                 <label className="input-label">Field of Study</label>
                 <input className="input" placeholder="Computer Science" value={edu.field}
+                  data-field-path={`education.${eduIndex}.field`} data-field-label={`Edu #${eduIndex+1} Field`}
                   onChange={(e) => updateEducation(edu.id, 'field', e.target.value)} />
               </div>
               <div className="input-group">
                 <label className="input-label">GPA</label>
                 <input className="input" placeholder="3.8/4.0" value={edu.gpa}
+                  data-field-path={`education.${eduIndex}.gpa`} data-field-label={`Edu #${eduIndex+1} GPA`}
                   onChange={(e) => updateEducation(edu.id, 'gpa', e.target.value)} />
               </div>
               <div className="input-group">
                 <label className="input-label">Start Date</label>
                 <input className="input" placeholder="Sep 2016" value={edu.startDate}
+                  data-field-path={`education.${eduIndex}.startDate`} data-field-label={`Edu #${eduIndex+1} Start`}
                   onChange={(e) => updateEducation(edu.id, 'startDate', e.target.value)} />
               </div>
               <div className="input-group">
                 <label className="input-label">End Date</label>
                 <input className="input" placeholder="Jun 2020" value={edu.endDate}
+                  data-field-path={`education.${eduIndex}.endDate`} data-field-label={`Edu #${eduIndex+1} End`}
                   onChange={(e) => updateEducation(edu.id, 'endDate', e.target.value)} />
               </div>
             </div>
@@ -502,7 +533,7 @@ export default function ResumeForm() {
           </button>
         </div>
 
-        {resumeData.certifications.map((cert) => (
+        {resumeData.certifications.map((cert, certIndex) => (
           <div key={cert.id} className={styles.entryCard}>
             <div className={styles.entryHeader}>
               <h4 className={styles.entryTitle}>{cert.name || 'New Certification'}</h4>
@@ -514,16 +545,19 @@ export default function ResumeForm() {
               <div className="input-group">
                 <label className="input-label">Certification Name</label>
                 <input className="input" placeholder="AWS Solutions Architect" value={cert.name}
+                  data-field-path={`certifications.${certIndex}.name`} data-field-label={`Cert #${certIndex+1} Name`}
                   onChange={(e) => updateCertification(cert.id, 'name', e.target.value)} />
               </div>
               <div className="input-group">
                 <label className="input-label">Issuer</label>
                 <input className="input" placeholder="Amazon Web Services" value={cert.issuer}
+                  data-field-path={`certifications.${certIndex}.issuer`} data-field-label={`Cert #${certIndex+1} Issuer`}
                   onChange={(e) => updateCertification(cert.id, 'issuer', e.target.value)} />
               </div>
               <div className="input-group">
                 <label className="input-label">Date</label>
                 <input className="input" placeholder="Mar 2023" value={cert.date}
+                  data-field-path={`certifications.${certIndex}.date`} data-field-label={`Cert #${certIndex+1} Date`}
                   onChange={(e) => updateCertification(cert.id, 'date', e.target.value)} />
               </div>
             </div>
@@ -540,7 +574,7 @@ export default function ResumeForm() {
           </button>
         </div>
 
-        {resumeData.projects.map((proj) => (
+        {resumeData.projects.map((proj, projIndex) => (
           <div key={proj.id} className={styles.entryCard}>
             <div className={styles.entryHeader}>
               <h4 className={styles.entryTitle}>{proj.name || 'New Project'}</h4>
@@ -552,11 +586,13 @@ export default function ResumeForm() {
               <div className="input-group">
                 <label className="input-label">Project Name</label>
                 <input className="input" placeholder="E-Commerce Platform" value={proj.name}
+                  data-field-path={`projects.${projIndex}.name`} data-field-label={`Project #${projIndex+1} Name`}
                   onChange={(e) => updateProject(proj.id, 'name', e.target.value)} />
               </div>
               <div className="input-group">
                 <label className="input-label">URL</label>
                 <input className="input" placeholder="github.com/..." value={proj.url}
+                  data-field-path={`projects.${projIndex}.url`} data-field-label={`Project #${projIndex+1} URL`}
                   onChange={(e) => updateProject(proj.id, 'url', e.target.value)} />
               </div>
               <div className="input-group" style={{ gridColumn: 'span 2' }}>
@@ -565,6 +601,7 @@ export default function ResumeForm() {
                   <span style={{ fontSize: '0.688rem', color: 'var(--text-muted)' }}>Supports **bold**, *italic*, [link](url)</span>
                 </div>
                 <textarea className="input textarea" placeholder="Built a full-stack platform using **Next.js** and [Stripe API](https://stripe.com)..." value={proj.description}
+                  data-field-path={`projects.${projIndex}.description`} data-field-label={`Project #${projIndex+1} Description`}
                   onChange={(e) => updateProject(proj.id, 'description', e.target.value)} rows={2} />
               </div>
             </div>

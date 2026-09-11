@@ -36,9 +36,17 @@ export function parseFormattedText(text: string): React.ReactNode[] {
   // 3. Bold-italic: ***text*** or ___text___
   // 4. Bold: **text** or __text__ or <b>text</b> or <strong>text</strong>
   // 5. Italic: *text* or _text_ or <i>text</i> or <em>text</em>
-  // 6. Bare URL: (https?:\/\/[^\s]+)
+  // Regex pattern matching:
+  // 1. Color tag: [color=#hex]text[/color] or <span style="color:...">text</span> or <font color="...">text</font>
+  // 2. Size tag: [size=...]text[/size]
+  // 3. Markdown link: [text](url)
+  // 4. HTML link: <a href="url">text</a>
+  // 5. Bold-italic: ***text*** or ___text___
+  // 6. Bold: **text** or __text__ or <b>text</b> or <strong>text</strong>
+  // 7. Italic: *text* or _text_ or <i>text</i> or <em>text</em>
+  // 8. Bare URL: (https?:\/\/[^\s]+)
   const tokenRegex =
-    /(\[([^\]]+)\]\((https?:\/\/[^\s)]+|mailto:[^\s)]+|tel:[^\s)]+|[^\s)]+)\))|(<a\s+(?:[^>]*?\s+)?href=["']([^"']*)["'][^>]*>(.*?)<\/a>)|(\*\*\*([^*]+)\*\*\*|___([^_]+)___)|(\*\*([^*]+)\*\*|__([^_]+)__|<b>(.*?)<\/b>|<strong>(.*?)<\/strong>)|(\*([^*]+)\*|_([^_]+)_|<i>(.*?)<\/i>|<em>(.*?)<\/em>)|(https?:\/\/[^\s<]+)/gi;
+    /(\[color=([^\]]+)\](.*?)\[\/color\]|<(?:span\s+style=["']color:\s*([^"';]+);?["']|font\s+color=["']([^"']+)["'])>(.*?)<\/(?:span|font)>)|(\[size=([^\]]+)\](.*?)\[\/size\])|(\[([^\]]+)\]\((https?:\/\/[^\s)]+|mailto:[^\s)]+|tel:[^\s)]+|[^\s)]+)\))|(<a\s+(?:[^>]*?\s+)?href=["']([^"']*)["'][^>]*>(.*?)<\/a>)|(\*\*\*([^*]+)\*\*\*|___([^_]+)___)|(\*\*([^*]+)\*\*|__([^_]+)__|<b>(.*?)<\/b>|<strong>(.*?)<\/strong>)|(\*([^*]+)\*|_([^_]+)_|<i>(.*?)<\/i>|<em>(.*?)<\/em>)|(https?:\/\/[^\s<]+)/gi;
 
   const nodes: React.ReactNode[] = [];
   let lastIndex = 0;
@@ -55,6 +63,15 @@ export function parseFormattedText(text: string): React.ReactNode[] {
 
     const [
       fullMatch,
+      _colorMatch,
+      bbColorVal,
+      bbColorText,
+      spanColorVal,
+      fontColorVal,
+      htmlColorText,
+      _sizeMatch,
+      sizeVal,
+      sizeText,
       _mdLink,
       mdLinkText,
       mdLinkUrl,
@@ -77,7 +94,42 @@ export function parseFormattedText(text: string): React.ReactNode[] {
       bareUrl,
     ] = match;
 
-    if (mdLinkText && mdLinkUrl) {
+    if (bbColorVal && bbColorText !== undefined) {
+      nodes.push(
+        <span key={`color-${keyIndex++}`} style={{ color: bbColorVal }}>
+          {parseFormattedText(bbColorText)}
+        </span>
+      );
+    } else if ((spanColorVal || fontColorVal) && htmlColorText !== undefined) {
+      const color = spanColorVal || fontColorVal;
+      nodes.push(
+        <span key={`color-${keyIndex++}`} style={{ color }}>
+          {parseFormattedText(htmlColorText)}
+        </span>
+      );
+    } else if (sizeVal && sizeText !== undefined) {
+      // Handle relative sizes like +2, -1 and absolute sizes like 14pt, 16px
+      let fontSize: string;
+      if (sizeVal.startsWith('+') || sizeVal.startsWith('-')) {
+        // Relative: e.g. [size=+2] → calc(1em + 2pt), [size=-1] → calc(1em - 1pt)
+        const num = parseFloat(sizeVal);
+        if (!isNaN(num)) {
+          fontSize = num >= 0 ? `calc(1em + ${num}pt)` : `calc(1em - ${Math.abs(num)}pt)`;
+        } else {
+          fontSize = 'inherit';
+        }
+      } else if (sizeVal.endsWith('pt') || sizeVal.endsWith('px') || sizeVal.endsWith('em') || sizeVal.endsWith('%')) {
+        fontSize = sizeVal;
+      } else {
+        // Bare number treated as pt
+        fontSize = `${sizeVal}pt`;
+      }
+      nodes.push(
+        <span key={`size-${keyIndex++}`} style={{ fontSize }}>
+          {parseFormattedText(sizeText)}
+        </span>
+      );
+    } else if (mdLinkText && mdLinkUrl) {
       // [text](url)
       const href = mdLinkUrl.startsWith('http') || mdLinkUrl.startsWith('mailto:') || mdLinkUrl.startsWith('tel:')
         ? mdLinkUrl

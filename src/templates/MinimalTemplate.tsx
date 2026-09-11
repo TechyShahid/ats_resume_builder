@@ -8,7 +8,7 @@ export default function MinimalTemplate({ data }: { data: ResumeData }) {
   return (
     <div className={styles.resume}>
       <div className={styles.header}>
-        <h1 className={styles.name}>{personalInfo.fullName || 'Your Name'}</h1>
+        <h1 className={styles.name}><FormattedText text={personalInfo.fullName || 'Your Name'} /></h1>
         <div className={styles.contact}>
           {[personalInfo.email, personalInfo.phone, personalInfo.location]
             .filter(Boolean)

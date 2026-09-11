@@ -12,13 +12,14 @@ interface RichToolbarProps {
 }
 
 export default function RichToolbar({ textareaRef, value, onChange, label }: RichToolbarProps) {
-  const applyFormat = (type: 'bold' | 'italic' | 'link') => {
+  const applyFormat = (type: 'bold' | 'italic' | 'link' | 'color') => {
     const el = textareaRef?.current;
     if (!el) {
       // Fallback if ref is not provided: append sample syntax
       if (type === 'bold') onChange(`${value} **bold text**`);
       else if (type === 'italic') onChange(`${value} *italic text*`);
       else if (type === 'link') onChange(`${value} [link text](https://example.com)`);
+      else if (type === 'color') onChange(`${value} [color=#2563eb]colored text[/color]`);
       return;
     }
 
@@ -50,6 +51,12 @@ export default function RichToolbar({ textareaRef, value, onChange, label }: Ric
       if (!url) return;
       const textToUse = selected || 'link text';
       replacement = `[${textToUse}](${url})`;
+      newCursorPos = start + replacement.length;
+    } else if (type === 'color') {
+      const color = prompt('Enter hex color or CSS color name (e.g. #2563eb, #059669, #881337):', '#2563eb');
+      if (!color) return;
+      const textToUse = selected || 'colored text';
+      replacement = `[color=${color}]${textToUse}[/color]`;
       newCursorPos = start + replacement.length;
     }
 
@@ -88,6 +95,14 @@ export default function RichToolbar({ textareaRef, value, onChange, label }: Ric
         title="Add hyperlink ([text](url))"
       >
         <HiLink /> Link
+      </button>
+      <button
+        type="button"
+        className={styles.btn}
+        onClick={() => applyFormat('color')}
+        title="Text color ([color=#hex]text[/color])"
+      >
+        🎨 Color
       </button>
       {label && <span className={styles.hint}>{label}</span>}
     </div>

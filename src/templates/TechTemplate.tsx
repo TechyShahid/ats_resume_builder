@@ -17,8 +17,8 @@ export default function TechTemplate({ data }: { data: ResumeData }) {
       {/* Header */}
       <header className={styles.header}>
         <div className={styles.headerMain}>
-          <h1 className={styles.name}>{personalInfo.fullName || 'Your Name'}</h1>
-          {personalInfo.title && <p className={styles.title}>&lt;{personalInfo.title} /&gt;</p>}
+          <h1 className={styles.name}><FormattedText text={personalInfo.fullName || 'Your Name'} /></h1>
+          {personalInfo.title && <p className={styles.title}>&lt;<FormattedText text={personalInfo.title} /> /&gt;</p>}
         </div>
         <div className={styles.contact}>
           {personalInfo.email && (

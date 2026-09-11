@@ -1,7 +1,12 @@
 'use client';
 
 import { useRef, useState, useCallback } from 'react';
-import { HiArrowDownTray, HiMagnifyingGlassMinus, HiMagnifyingGlassPlus, HiPrinter } from 'react-icons/hi2';
+import {
+  HiArrowDownTray,
+  HiMagnifyingGlassMinus,
+  HiMagnifyingGlassPlus,
+  HiPrinter,
+} from 'react-icons/hi2';
 import { useResume } from '@/context/ResumeContext';
 import ClassicTemplate from '@/templates/ClassicTemplate';
 import ModernTemplate from '@/templates/ModernTemplate';
@@ -16,8 +21,6 @@ import ElegantTemplate from '@/templates/ElegantTemplate';
 import {
   RESUME_FONTS,
   RESUME_FONT_SIZES,
-  type ResumeFontFamily,
-  type ResumeFontSize,
 } from '@/types/resume';
 import styles from './ResumePreview.module.css';
 
@@ -39,9 +42,8 @@ export default function ResumePreview() {
     resumeData,
     selectedTemplate,
     selectedFont,
-    setSelectedFont,
     selectedFontSize,
-    setSelectedFontSize,
+    fieldStyles,
   } = useResume();
   const [zoom, setZoom] = useState(0.55);
   const [downloading, setDownloading] = useState(false);
@@ -50,6 +52,45 @@ export default function ResumePreview() {
   const TemplateComponent = TEMPLATES[selectedTemplate];
   const activeFont = RESUME_FONTS.find((f) => f.id === selectedFont) || RESUME_FONTS[0];
   const activeSize = RESUME_FONT_SIZES.find((s) => s.id === selectedFontSize) || RESUME_FONT_SIZES[1];
+
+  const getFieldStyleVars = useCallback((): Record<string, string> => {
+    const vars: Record<string, string> = {};
+
+    // Name
+    if (fieldStyles.name?.size) vars['--resume-name-size-delta'] = `${fieldStyles.name.size}pt`;
+    if (fieldStyles.name?.bold !== undefined) vars['--resume-name-weight'] = fieldStyles.name.bold ? '700' : '400';
+    if (fieldStyles.name?.italic !== undefined) vars['--resume-name-style'] = fieldStyles.name.italic ? 'italic' : 'normal';
+    if (fieldStyles.name?.color) vars['--resume-name-color'] = fieldStyles.name.color;
+
+    // Title
+    if (fieldStyles.title?.size) vars['--resume-title-size-delta'] = `${fieldStyles.title.size}pt`;
+    if (fieldStyles.title?.bold !== undefined) vars['--resume-title-weight'] = fieldStyles.title.bold ? '700' : '400';
+    if (fieldStyles.title?.italic !== undefined) vars['--resume-title-style'] = fieldStyles.title.italic ? 'italic' : 'normal';
+    if (fieldStyles.title?.color) vars['--resume-title-color'] = fieldStyles.title.color;
+
+    // Section Title
+    if (fieldStyles.sectionTitle?.size) vars['--resume-section-title-size-delta'] = `${fieldStyles.sectionTitle.size}pt`;
+    if (fieldStyles.sectionTitle?.bold !== undefined) vars['--resume-section-title-weight'] = fieldStyles.sectionTitle.bold ? '700' : '400';
+    if (fieldStyles.sectionTitle?.italic !== undefined) vars['--resume-section-title-style'] = fieldStyles.sectionTitle.italic ? 'italic' : 'normal';
+    if (fieldStyles.sectionTitle?.color) vars['--resume-section-title-color'] = fieldStyles.sectionTitle.color;
+
+    // Entry Title
+    if (fieldStyles.entryTitle?.size) vars['--resume-entry-title-size-delta'] = `${fieldStyles.entryTitle.size}pt`;
+    if (fieldStyles.entryTitle?.bold !== undefined) vars['--resume-entry-title-weight'] = fieldStyles.entryTitle.bold ? '700' : '400';
+    if (fieldStyles.entryTitle?.italic !== undefined) vars['--resume-entry-title-style'] = fieldStyles.entryTitle.italic ? 'italic' : 'normal';
+    if (fieldStyles.entryTitle?.color) vars['--resume-entry-title-color'] = fieldStyles.entryTitle.color;
+
+    // Body Text
+    if (fieldStyles.bodyText?.size) vars['--resume-body-size-delta'] = `${fieldStyles.bodyText.size}pt`;
+    if (fieldStyles.bodyText?.bold !== undefined) vars['--resume-body-weight'] = fieldStyles.bodyText.bold ? '700' : '400';
+    if (fieldStyles.bodyText?.italic !== undefined) vars['--resume-body-style'] = fieldStyles.bodyText.italic ? 'italic' : 'normal';
+    if (fieldStyles.bodyText?.color) vars['--resume-body-color'] = fieldStyles.bodyText.color;
+
+    // Accent Color
+    if (fieldStyles.accentColor) vars['--resume-accent-color'] = fieldStyles.accentColor;
+
+    return vars;
+  }, [fieldStyles]);
 
   // Print-based PDF generation (most reliable fallback)
   const handlePrint = useCallback(() => {
@@ -95,6 +136,11 @@ export default function ResumePreview() {
             clonedElement.style.fontFamily = activeFont.fontFamily;
           }
           clonedElement.style.setProperty('--resume-font-size', activeSize.sizePt);
+
+          const fieldVars = getFieldStyleVars();
+          Object.entries(fieldVars).forEach(([prop, val]) => {
+            clonedElement.style.setProperty(prop, val);
+          });
         },
       });
 
@@ -122,7 +168,7 @@ export default function ResumePreview() {
     } finally {
       setDownloading(false);
     }
-  }, [resumeData.personalInfo.fullName, activeFont.fontFamily, activeSize.sizePt, handlePrint]);
+  }, [resumeData.personalInfo.fullName, activeFont.fontFamily, activeSize.sizePt, getFieldStyleVars, handlePrint]);
 
   return (
     <div className={styles.previewContainer}>
@@ -143,47 +189,6 @@ export default function ResumePreview() {
           >
             <HiMagnifyingGlassPlus />
           </button>
-        </div>
-
-        {/* Typography Controls */}
-        <div className={styles.typographyControls}>
-          <div className={styles.selectWrapper}>
-            <label htmlFor="resume-font-select" className={styles.ctrlLabel}>
-              Font
-            </label>
-            <select
-              id="resume-font-select"
-              className={styles.select}
-              value={selectedFont}
-              onChange={(e) => setSelectedFont(e.target.value as ResumeFontFamily)}
-              title="Select Resume Font Family"
-            >
-              {RESUME_FONTS.map((font) => (
-                <option key={font.id} value={font.id}>
-                  {font.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className={styles.selectWrapper}>
-            <label htmlFor="resume-size-select" className={styles.ctrlLabel}>
-              Size
-            </label>
-            <select
-              id="resume-size-select"
-              className={styles.select}
-              value={selectedFontSize}
-              onChange={(e) => setSelectedFontSize(e.target.value as ResumeFontSize)}
-              title="Select Resume Font Size"
-            >
-              {RESUME_FONT_SIZES.map((size) => (
-                <option key={size.id} value={size.id}>
-                  {size.name}
-                </option>
-              ))}
-            </select>
-          </div>
         </div>
 
         <div className={styles.downloadActions}>
@@ -222,6 +227,7 @@ export default function ResumePreview() {
                 '--resume-font': activeFont.fontFamily,
                 '--resume-font-size': activeSize.sizePt,
                 fontFamily: activeFont.fontFamily !== 'inherit' ? activeFont.fontFamily : undefined,
+                ...getFieldStyleVars(),
               } as React.CSSProperties
             }
           >

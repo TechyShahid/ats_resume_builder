@@ -6,6 +6,7 @@ import ResumeUploader from '@/components/builder/ResumeUploader';
 import ResumeForm from '@/components/builder/ResumeForm';
 import TemplateSelector from '@/components/builder/TemplateSelector';
 import ResumePreview from '@/components/builder/ResumePreview';
+import ResumeStylingStrip from '@/components/builder/ResumeStylingStrip';
 import Link from 'next/link';
 import type { BuilderStep } from '@/types/resume';
 import styles from './builder.module.css';
@@ -104,6 +105,9 @@ function BuilderContent() {
           )}
         </div>
       </div>
+
+      {/* Common Horizontal Resume Styling Strip Below Main Menu */}
+      <ResumeStylingStrip />
 
       {/* Main Content */}
       <div className={styles.mainContent}>

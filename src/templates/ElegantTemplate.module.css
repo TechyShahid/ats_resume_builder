@@ -18,18 +18,20 @@
 }
 
 .name {
-  font-size: 22pt;
-  font-weight: normal;
+  font-size: calc(22pt + var(--resume-name-size-delta, 0pt));
+  font-weight: var(--resume-name-weight, normal);
+  font-style: var(--resume-name-style, normal);
   letter-spacing: 1.5px;
-  color: #701a35;
+  color: var(--resume-name-color, var(--resume-accent-color, #701a35));
   text-transform: uppercase;
   margin-bottom: 2px;
 }
 
 .title {
-  font-size: 9pt;
-  font-style: italic;
-  color: #4b5563;
+  font-size: calc(9pt + var(--resume-title-size-delta, 0pt));
+  font-weight: var(--resume-title-weight, normal);
+  font-style: var(--resume-title-style, italic);
+  color: var(--resume-title-color, #4b5563);
   margin-bottom: 4px;
 }
 
@@ -44,7 +46,7 @@
 }
 
 .sep {
-  color: #881337;
+  color: var(--resume-accent-color, #881337);
   font-size: 6pt;
 }
 
@@ -59,11 +61,12 @@
 }
 
 .sectionTitle {
-  font-size: 9pt;
-  font-weight: 700;
+  font-size: calc(9pt + var(--resume-section-title-size-delta, 0pt));
+  font-weight: var(--resume-section-title-weight, 700);
+  font-style: var(--resume-section-title-style, normal);
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #701a35;
+  color: var(--resume-section-title-color, var(--resume-accent-color, #701a35));
   display: inline-block;
   background: #ffffff;
   padding: 0 12px;
@@ -77,14 +80,16 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: #881337;
+  background: var(--resume-accent-color, #881337);
   opacity: 0.35;
   z-index: 0;
 }
 
 .summaryText {
-  font-size: 8.2pt;
-  color: #262626;
+  font-size: calc(8.2pt + var(--resume-body-size-delta, 0pt));
+  font-weight: var(--resume-body-weight, 400);
+  font-style: var(--resume-body-style, normal);
+  color: var(--resume-body-color, #262626);
   text-align: justify;
   line-height: 1.34;
 }
@@ -100,15 +105,16 @@
 }
 
 .entryTitle {
-  font-size: 9pt;
-  font-weight: 700;
-  color: #1a1a1a;
+  font-size: calc(9pt + var(--resume-entry-title-size-delta, 0pt));
+  font-weight: var(--resume-entry-title-weight, 700);
+  font-style: var(--resume-entry-title-style, normal);
+  color: var(--resume-entry-title-color, #1a1a1a);
 }
 
 .entryCompany {
   font-size: 8.5pt;
   font-style: italic;
-  color: #701a35;
+  color: var(--resume-accent-color, #701a35);
 }
 
 .entryDate {
@@ -125,8 +131,10 @@
 }
 
 .bullets li {
-  font-size: 8.2pt;
-  color: #262626;
+  font-size: calc(8.2pt + var(--resume-body-size-delta, 0pt));
+  font-weight: var(--resume-body-weight, 400);
+  font-style: var(--resume-body-style, normal);
+  color: var(--resume-body-color, #262626);
   margin-bottom: 1px;
   line-height: 1.25;
 }

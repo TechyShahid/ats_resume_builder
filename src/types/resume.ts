@@ -203,6 +203,44 @@ export const RESUME_FONT_SIZES: ResumeFontSizeConfig[] = [
   { id: 'large', name: 'Large (9.5pt)', sizePt: '9.5pt', scale: 1.14 },
 ];
 
+export interface FieldCustomization {
+  size?: number; // delta in pt, e.g. -2, 0, +2, +4
+  bold?: boolean;
+  italic?: boolean;
+  color?: string; // hex color or empty for template default
+}
+
+export interface ResumeFieldStyles {
+  name: FieldCustomization;
+  title: FieldCustomization;
+  sectionTitle: FieldCustomization;
+  entryTitle: FieldCustomization;
+  bodyText: FieldCustomization;
+  accentColor?: string;
+}
+
+export const DEFAULT_FIELD_STYLES: ResumeFieldStyles = {
+  name: {},
+  title: {},
+  sectionTitle: {},
+  entryTitle: {},
+  bodyText: {},
+  accentColor: '',
+};
+
+export const PRESET_COLORS = [
+  { name: 'Default', hex: '' },
+  { name: 'Charcoal', hex: '#1e293b' },
+  { name: 'Navy', hex: '#0f2942' },
+  { name: 'Royal Blue', hex: '#1d4ed8' },
+  { name: 'Indigo', hex: '#6366f1' },
+  { name: 'Emerald', hex: '#059669' },
+  { name: 'Wine', hex: '#881337' },
+  { name: 'Amber Gold', hex: '#b8860b' },
+  { name: 'Purple', hex: '#9333ea' },
+  { name: 'Slate Gray', hex: '#475569' },
+];
+
 export const EMPTY_RESUME: ResumeData = {
   personalInfo: {
     fullName: '',
